@@ -1,5 +1,7 @@
 package pojo;
 
+import java.util.LinkedHashMap;
+
 public class User {
 
 	private String firstName;
@@ -7,6 +9,20 @@ public class User {
 	private String address;
 	private String ID;
 	private String country;
+	private LinkedHashMap<String,String> languageOptions;
+	private String favouriteLanguage;
+	
+	
+	public User() {
+		languageOptions = new LinkedHashMap<>();
+		languageOptions.put("English", "English");
+		languageOptions.put("Chinese", "Chinese");
+		languageOptions.put("Japanese", "Japanese");
+		languageOptions.put("Korean", "Korean");
+		languageOptions.put("Thai", "Thai");
+	}
+	
+	
 	public String getFirstName() {
 		return firstName;
 	}
@@ -37,6 +53,19 @@ public class User {
 	public void setCountry(String country) {
 		this.country = country;
 	}
+	public String getFavouriteLanguage() {
+		return favouriteLanguage;
+	}
+	public void setFavouriteLanguage(String favouriteLanguage) {
+		this.favouriteLanguage = favouriteLanguage;
+	}
+
+
+	public LinkedHashMap<String, String> getLanguageOptions() {
+		return languageOptions;
+	}
+	
+	
 	
 	
 	

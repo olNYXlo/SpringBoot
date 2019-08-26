@@ -18,6 +18,11 @@ User Address : ${User.address }
 
 <br><br>
 
+Favourite Language : ${User.favouriteLanguage}
+
+
+<br><br>
+
 Country : ${User.country }
 
 

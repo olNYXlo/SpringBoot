@@ -4,19 +4,22 @@
 <head>
 <title>======Registration Form=====</title>
 </head>
+
 <script>  
 function validateform(){  
 var ID=document.myform.ID.value; 
+var validID = "@gmail.com";
+var validID2 = "@hotmail.com";
 
 
   
 if (ID==null || ID==""){  
   alert("ID can't be blank");  
   return false;  
-}else if(!ID.includes(gmail.com)){  
-  alert("Please enter a valid ID");  
+}else if(!ID.includes(validID) && !ID.includes(validID2)){  
+  alert("Please enter a valid ID"); 
   return false;  
-  }  
+  }
 }  
 </script> 
 
@@ -56,14 +59,36 @@ User ID : <form:input path = "ID" />
 Address : <form:input path = "address" />
 <br><br>
 
+Favourite Language :
+
+<form:radiobuttons path="favouriteLanguage" items="${User.languageOptions}" />
+
+<!-- 
+English <form:radiobutton path="favouriteLanguage" value="English" />
+Chinese <form:radiobutton path="favouriteLanguage" value="Chinese" />
+Japanese <form:radiobutton path="favouriteLanguage" value="Japanese" />
+Korean <form:radiobutton path="favouriteLanguage" value="Korean" />
+Thai <form:radiobutton path="favouriteLanguage" value="Thai" />
+
+ -->
+
+
+
+
+<br><br>
 
 <!-- CREATES DROP DOWN MENU OF OPTIONS -->
 Country :
 <form:select path ="country">
+<form:options items="${countryOptions}" />
+<!-- 
 <form:option value ="China" label ="China" />
 <form:option value ="India" label ="India" />
 <form:option value ="USA" label ="USA" />
 <form:option value ="Paris" label ="Paris" />
+
+ -->
+
 </form:select>
 
 
