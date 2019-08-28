@@ -3,13 +3,18 @@ package dbService;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import dbDAO.ATMDAO;
 import dbDAO.ATMDAOImpl;
 import dbPOJO.OnlineLoginAccount;
 import dbPOJO.BankAccount;
 
 public class RegisterServiceImpl implements RegisterService {
-
+	@Autowired
+	ATMDAO refDAO; // creates ATMDAO reference
+	
+	
 	@Override
 	public void InvokeRegister() throws ClassNotFoundException, SQLException {
 

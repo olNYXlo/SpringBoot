@@ -3,16 +3,23 @@ package dbService;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import dbController.TransactionMenu;
 import dbPOJO.BankAccount;
 import dbDAO.ATMDAO;
 import dbDAO.ATMDAOImpl;
 
+@Service
 public class CheckBalanceServiceImpl {
+	
+	@Autowired
+	ATMDAO refDAO; // creates ATMDAO reference
 
 	public void InvokeCheckBalance(BankAccount BA) throws SQLException {
 		
-		ATMDAO refDAO; // creates ATMDAO reference
+		
 		refDAO = new ATMDAOImpl(); // creates ATMDAOImpl object
 		
 		refDAO.checkbalance(BA);

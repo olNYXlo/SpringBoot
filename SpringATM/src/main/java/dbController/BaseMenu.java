@@ -3,11 +3,26 @@ package dbController;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import dbService.ForgotPwServiceImpl;
 import dbService.LoginService2Impl;
 import dbService.RegisterServiceImpl;
 
+
+@RestController
+@RequestMapping("/ATM")
 public class BaseMenu {
+	
+	@Autowired
+	RegisterServiceImpl RSI;
+	@Autowired
+	LoginService2Impl LSI;
+	@Autowired
+	ForgotPwServiceImpl FPWSI;
+	
 
 	// launches the base menu when the application starts
 
@@ -37,23 +52,21 @@ public class BaseMenu {
 			switch (Choice) {// Depending on user input, will start the relevant service
 
 			case 1:// Register Service
-				RegisterServiceImpl RSI = new RegisterServiceImpl();
+				RSI = new RegisterServiceImpl();
 				RSI.InvokeRegister();
 				 // launch Register Service
 				break; // end of case 1
 				
 
 			case 2:// Login Service
-				
-				LoginService2Impl LSI = new LoginService2Impl();
+								LSI = new LoginService2Impl();
 				LSI.InvokeLogin();
 				
 				break; // end of case 2;
 
 
 			case 3:// Forgot Password Service
-				
-				ForgotPwServiceImpl FPWSI = new ForgotPwServiceImpl();
+				FPWSI = new ForgotPwServiceImpl();
 				FPWSI.InvokeForgotPw();
 				
 

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 5.3//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-5.3.dtd">
+
+<hibernate-mapping>
+<class name="dbPOJO.OnlineLoginAccount" table = "Account">
+<id name="userID" column = "UserID">
+<generator class="assigned"></generator>
+</id>
+
+<property name = "password" column = "pw"></property>
+<property name = "SecurityKey" column = "SecurityKey"></property>
+
+</class>
+
+
+</hibernate-mapping>
+
+
+

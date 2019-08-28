@@ -3,17 +3,22 @@ package dbService;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import dbDAO.ATMDAO;
 import dbDAO.ATMDAOImpl;
 import dbPOJO.OnlineLoginAccount;
 
 
 public class ForgotPwServiceImpl implements ForgotPwService {
+	
+	@Autowired
+	ATMDAO refDAO; // creates ATMDAO reference
 
 	@Override
 	public void InvokeForgotPw() throws ClassNotFoundException, SQLException {
 
-		ATMDAO refDAO; // creates ATMDAO reference
+		
 		refDAO = new ATMDAOImpl(); // creates ATMDAOImpl object
 
 		boolean loopcheckFPW = true;

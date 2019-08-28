@@ -4,11 +4,42 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.boot.Metadata;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Restrictions;
+import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import dbPOJO.BankAccount;
 import dbPOJO.OnlineLoginAccount;
 
+@Repository
 public class ATMDAOImpl implements ATMDAO {
+	
+	static StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
+	static Metadata meta = new MetadataSources(ssr).getMetadataBuilder().build();
+	
+	
+	// EntityManagerFactory emf = Persistence.createEntityManagerFactory("atmaccount");
+	// EntityManager em = emf.createEntityManager();
 
 	Connection con;
 	PreparedStatement ps,ps2;
@@ -163,11 +194,40 @@ public class ATMDAOImpl implements ATMDAO {
 
 	}
 
+
 	public static boolean checkIDExists(String UID) throws ClassNotFoundException, SQLException {
 		
+		String UserName=null;
+		boolean check = false;
+		
+		// SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(OnlineLoginAccount.class).buildSessionFactory();
+		// Session session = factory.getCurrentSession();
+		SessionFactory factory = meta.getSessionFactoryBuilder().build();
+		Session session = factory.openSession();
+		CriteriaBuilder cBuilder = session.getCriteriaBuilder();
+		CriteriaQuery<OnlineLoginAccount> c = cBuilder.createQuery(OnlineLoginAccount.class);
+		Root<OnlineLoginAccount> ObjRoot = c.from(OnlineLoginAccount.class);
+				Predicate restrictions = cBuilder.equal(ObjRoot.get("userID"), UID);
+				c.select(ObjRoot).where(restrictions);
+				Query query = session.createQuery(c);
+
+		try {
+			System.out.println("Checking if UserID already exists");
+			List<OnlineLoginAccount> results = query.getResultList();
+			for (OnlineLoginAccount Acc : results) {
+				UserName = Acc.getUserID();
+				System.out.println("UserID found : " + UserName);
+			}
+			
+			
+		}
+		finally {}
+		return (UserName == UID? true: false);
+		
+		/*
 		// checks if UserID exists in login DB
 
-		boolean check = false;
+		
 
 		Connection con = ATMDBConnection.myConnection();
 
@@ -188,12 +248,19 @@ public class ATMDAOImpl implements ATMDAO {
 		con.close();
 		return check;
 		// do not close connection here else will not run properly
-
+		*/
 	}
+
+	
 
 	@Override
 	public void register(OnlineLoginAccount OLA, BankAccount BA) throws SQLException {
+		
+		
 		getConnection(); // starts up DB connection
+		
+		// em.getTransaction().begin();
+		// em.persist(OLA);
 
 		ps = con.prepareStatement("INSERT INTO Account VALUES(?,?,?)"); // Create statement using SQL connection
 		
