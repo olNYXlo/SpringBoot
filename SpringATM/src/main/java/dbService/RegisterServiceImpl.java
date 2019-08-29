@@ -99,7 +99,7 @@ public class RegisterServiceImpl implements RegisterService {
 											BankAccount BA = new BankAccount();
 											BA.setUserID(UserID);
 											BA.setAccHolderNRIC(NRIC);
-											BA.setBankAcc(BankAccNo);
+											BA.setBankAccNo(BankAccNo);
 											refDAO.register(NewAcc, BA);
 											System.out.println("Bank Account is successfully linked to your account");
 											System.out.println("======================================================================================");

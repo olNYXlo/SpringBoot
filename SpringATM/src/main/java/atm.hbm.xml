@@ -13,6 +13,18 @@
 <property name = "SecurityKey" column = "SecurityKey"></property>
 
 </class>
+<class name="dbPOJO.BankAccount" table = "BankAccount">
+<id name="BankAccNo" column = "BankAccNo">
+<generator class="assigned"></generator>
+</id>
+
+<property name = "BankBalance" column = "BankBalance"></property>
+<property name = "UserID" column = "UserID"></property>
+<property name = "AccName" column = "AccountName"></property>
+<property name = "AccHolderNRIC" column = "AccountHolderNRIC"></property>
+<property name = "AccHolderName" column = "AccountHolderName"></property>
+
+</class>
 
 
 </hibernate-mapping>

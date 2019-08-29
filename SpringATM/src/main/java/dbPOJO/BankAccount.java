@@ -42,7 +42,7 @@ public class BankAccount {
 	}
 
 	
-	public String getBankAcc() {
+	public String getBankAccNo() {
 		return BankAccNo;
 	}
 
@@ -58,7 +58,7 @@ public class BankAccount {
 	public void setUserID(String userID) {
 		UserID = userID;
 	}
-	public void setBankAcc(String bankAcc) {
+	public void setBankAccNo(String bankAcc) {
 		BankAccNo = bankAcc;
 	}
 	public double getBankBalance() {
