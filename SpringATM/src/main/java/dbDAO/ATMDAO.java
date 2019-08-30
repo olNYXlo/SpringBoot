@@ -17,7 +17,7 @@ public interface ATMDAO {
 	
 	public void deposit (BankAccount BA, double val) throws SQLException;
 	
-	public void checkbalance(BankAccount BA) throws SQLException;
+	public double checkbalance(BankAccount BA) throws SQLException;
 	
 	public BankAccount getBANo(OnlineLoginAccount OLA) throws SQLException;
 	

@@ -35,9 +35,14 @@ import dbPOJO.OnlineLoginAccount;
 @Repository
 public class ATMDAOImpl implements ATMDAO {
 
-	static StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
-	static Metadata meta = new MetadataSources(ssr).getMetadataBuilder().build();
-	static SessionFactory factory = meta.getSessionFactoryBuilder().build();
+	// StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
+	// Metadata meta = new MetadataSources(ssr).getMetadataBuilder().build();
+	// SessionFactory factory = meta.getSessionFactoryBuilder().build();
+	// Cannot declare these attributes as static even though every transaction/ service
+	// has to create these objects as will run into error
+	
+	
+	
 	// EntityManagerFactory emf =
 	// Persistence.createEntityManagerFactory("atmaccount");
 	// EntityManager em = emf.createEntityManager();
@@ -69,6 +74,9 @@ public class ATMDAOImpl implements ATMDAO {
 		// Session session = factory.getCurrentSession();
 		
 		// SessionFactory factory = meta.getSessionFactoryBuilder().build();
+		StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
+		Metadata meta = new MetadataSources(ssr).getMetadataBuilder().build();
+		SessionFactory factory = meta.getSessionFactoryBuilder().build();
 		Session session = factory.openSession();
 		CriteriaBuilder cBuilder = session.getCriteriaBuilder();
 		CriteriaQuery<BankAccount> c = cBuilder.createQuery(BankAccount.class);
@@ -120,6 +128,9 @@ public class ATMDAOImpl implements ATMDAO {
 		// Session session = factory.getCurrentSession();
 		
 		// SessionFactory factory = meta.getSessionFactoryBuilder().build();
+		StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
+		Metadata meta = new MetadataSources(ssr).getMetadataBuilder().build();
+		SessionFactory factory = meta.getSessionFactoryBuilder().build();
 		Session session = factory.openSession();
 		CriteriaBuilder cBuilder = session.getCriteriaBuilder();
 		CriteriaQuery<OnlineLoginAccount> c = cBuilder.createQuery(OnlineLoginAccount.class);
@@ -166,6 +177,9 @@ public class ATMDAOImpl implements ATMDAO {
 		// Session session = factory.getCurrentSession();
 		
 		// SessionFactory factory = meta.getSessionFactoryBuilder().build();
+		StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
+		Metadata meta = new MetadataSources(ssr).getMetadataBuilder().build();
+		SessionFactory factory = meta.getSessionFactoryBuilder().build();
 		Session session = factory.openSession();
 		CriteriaBuilder cBuilder = session.getCriteriaBuilder();
 		CriteriaQuery<BankAccount> c = cBuilder.createQuery(BankAccount.class);
@@ -210,6 +224,9 @@ public class ATMDAOImpl implements ATMDAO {
 		// Session session = factory.getCurrentSession();
 		
 		// SessionFactory factory = meta.getSessionFactoryBuilder().build();
+		StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
+		Metadata meta = new MetadataSources(ssr).getMetadataBuilder().build();
+		SessionFactory factory = meta.getSessionFactoryBuilder().build();
 		Session session = factory.openSession();
 		CriteriaBuilder cBuilder = session.getCriteriaBuilder();
 		CriteriaQuery<BankAccount> c = cBuilder.createQuery(BankAccount.class);
@@ -270,6 +287,9 @@ public class ATMDAOImpl implements ATMDAO {
 		// Session session = factory.getCurrentSession();
 		
 		// SessionFactory factory = meta.getSessionFactoryBuilder().build();
+		StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
+		Metadata meta = new MetadataSources(ssr).getMetadataBuilder().build();
+		SessionFactory factory = meta.getSessionFactoryBuilder().build();
 		Session session = factory.openSession();
 		CriteriaBuilder cBuilder = session.getCriteriaBuilder();
 		CriteriaQuery<BankAccount> c = cBuilder.createQuery(BankAccount.class);
@@ -320,6 +340,9 @@ public class ATMDAOImpl implements ATMDAO {
 		// Session session = factory.getCurrentSession();
 		
 		// SessionFactory factory = meta.getSessionFactoryBuilder().build();
+		StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
+		Metadata meta = new MetadataSources(ssr).getMetadataBuilder().build();
+		SessionFactory factory = meta.getSessionFactoryBuilder().build();
 		Session session = factory.openSession();
 		CriteriaBuilder cBuilder = session.getCriteriaBuilder();
 		CriteriaQuery<OnlineLoginAccount> c = cBuilder.createQuery(OnlineLoginAccount.class);
@@ -359,6 +382,9 @@ public class ATMDAOImpl implements ATMDAO {
 		// Session session = factory.getCurrentSession();
 		
 		// SessionFactory factory = meta.getSessionFactoryBuilder().build();
+		StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
+		Metadata meta = new MetadataSources(ssr).getMetadataBuilder().build();
+		SessionFactory factory = meta.getSessionFactoryBuilder().build();
 		Session session = factory.openSession();
 		session.beginTransaction();
 		session.save(OLA);
@@ -399,6 +425,9 @@ public class ATMDAOImpl implements ATMDAO {
 		// Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(OnlineLoginAccount.class).buildSessionFactory();
 		// Session session = factory.getCurrentSession();
 		// SessionFactory factory = meta.getSessionFactoryBuilder().build();
+		StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
+		Metadata meta = new MetadataSources(ssr).getMetadataBuilder().build();
+		SessionFactory factory = meta.getSessionFactoryBuilder().build();
 		Session session = factory.openSession();
 		CriteriaBuilder cBuilder = session.getCriteriaBuilder();
 		CriteriaQuery<OnlineLoginAccount> c = cBuilder.createQuery(OnlineLoginAccount.class);
@@ -441,6 +470,9 @@ public class ATMDAOImpl implements ATMDAO {
 		// Session session = factory.getCurrentSession();
 		
 		// SessionFactory factory = meta.getSessionFactoryBuilder().build();
+		StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
+		Metadata meta = new MetadataSources(ssr).getMetadataBuilder().build();
+		SessionFactory factory = meta.getSessionFactoryBuilder().build();
 		Session session = factory.openSession();
 		CriteriaBuilder cBuilder = session.getCriteriaBuilder();
 		CriteriaQuery<BankAccount> c = cBuilder.createQuery(BankAccount.class);
@@ -460,7 +492,7 @@ public class ATMDAOImpl implements ATMDAO {
 		for (BankAccount BAcc : results) {
 			BA.setBankAccNo(BAcc.getBankAccNo());
 			BA.setUserID(OLA.getUserID());
-			BA.setBankBalance(BAcc.getBankBalance());
+			// BA.setBankBalance(BAcc.getBankBalance());
 		}
 		session.close();
 		return BA;
@@ -482,6 +514,9 @@ public class ATMDAOImpl implements ATMDAO {
 		// Session session = factory.getCurrentSession();
 		
 		// SessionFactory factory = meta.getSessionFactoryBuilder().build();
+		StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
+		Metadata meta = new MetadataSources(ssr).getMetadataBuilder().build();
+		SessionFactory factory = meta.getSessionFactoryBuilder().build();
 		Session session = factory.openSession();
 		CriteriaBuilder cBuilder = session.getCriteriaBuilder();
 		CriteriaQuery<OnlineLoginAccount> c = cBuilder.createQuery(OnlineLoginAccount.class);
@@ -519,13 +554,16 @@ public class ATMDAOImpl implements ATMDAO {
 		// Session session = factory.getCurrentSession();
 		
 		// SessionFactory factory = meta.getSessionFactoryBuilder().build();
+		StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
+		Metadata meta = new MetadataSources(ssr).getMetadataBuilder().build();
+		SessionFactory factory = meta.getSessionFactoryBuilder().build();
 		Session session = factory.openSession();		
 		
 		session.beginTransaction();
 		CriteriaBuilder cBuilder = session.getCriteriaBuilder();
 		CriteriaUpdate<BankAccount> c = cBuilder.createCriteriaUpdate(BankAccount.class);
 		Root<BankAccount> ObjRoot = c.from(BankAccount.class);	
-		c.set(ObjRoot.get("BankBalance"), BA.getBankBalance() - val);
+		c.set(ObjRoot.get("BankBalance"), checkbalance(BA) - val);
 		c.where(cBuilder.equal(ObjRoot.get("UserID"), BA.getUserID()));
 		
 		session.createQuery(c).executeUpdate();
@@ -533,8 +571,6 @@ public class ATMDAOImpl implements ATMDAO {
 		session.getTransaction().commit();
 		session.close();
 		
-		
-
 
 	}
 
@@ -546,13 +582,16 @@ public class ATMDAOImpl implements ATMDAO {
 		// Session session = factory.getCurrentSession();
 		
 		// SessionFactory factory = meta.getSessionFactoryBuilder().build();
+		StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
+		Metadata meta = new MetadataSources(ssr).getMetadataBuilder().build();
+		SessionFactory factory = meta.getSessionFactoryBuilder().build();
 		Session session = factory.openSession();		
 		
 		session.beginTransaction();
 		CriteriaBuilder cBuilder = session.getCriteriaBuilder();
 		CriteriaUpdate<BankAccount> c = cBuilder.createCriteriaUpdate(BankAccount.class);
 		Root<BankAccount> ObjRoot = c.from(BankAccount.class);	
-		c.set(ObjRoot.get("BankBalance"), BA.getBankBalance() + val);
+		c.set(ObjRoot.get("BankBalance"), checkbalance(BA) + val);
 		c.where(cBuilder.equal(ObjRoot.get("UserID"), BA.getUserID()));
 		
 		session.createQuery(c).executeUpdate();
@@ -566,13 +605,18 @@ public class ATMDAOImpl implements ATMDAO {
 	}
 
 	@Override
-	public void checkbalance(BankAccount BA) throws SQLException {
+	public double checkbalance(BankAccount BA) throws SQLException {
+		
+		double Balance = 0;
 		
 		// SessionFactory factory = new
 		// Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(OnlineLoginAccount.class).buildSessionFactory();
 		// Session session = factory.getCurrentSession();
 		
 		// SessionFactory factory = meta.getSessionFactoryBuilder().build();
+		StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
+		Metadata meta = new MetadataSources(ssr).getMetadataBuilder().build();
+		SessionFactory factory = meta.getSessionFactoryBuilder().build();
 		Session session = factory.openSession();
 		CriteriaBuilder cBuilder = session.getCriteriaBuilder();
 		CriteriaQuery<BankAccount> c = cBuilder.createQuery(BankAccount.class);
@@ -588,13 +632,15 @@ public class ATMDAOImpl implements ATMDAO {
 		// Expected to return 1 row only
 		Query query = session.createQuery(c);
 		List<BankAccount> results = query.getResultList();
-		System.out.println("Checking if Bank Balance");
+		System.out.println("Checking of Bank Balance");
 		for (BankAccount BAcc : results) {
+			Balance = BAcc.getBankBalance();
 			System.out.println("Printing Bank Balance");
-			System.out.println("Bank Balance for : " + BAcc.getBankAccNo() + " is SGD " + BAcc.getBankBalance());
+			System.out.println("Bank Balance for : " + BA.getBankAccNo() + " is SGD " + Balance);
 			System.out.println("======================================================================================");
 		}	
 		session.close();
+		return Balance;
 		
 
 
