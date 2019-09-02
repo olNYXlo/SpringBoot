@@ -59,7 +59,7 @@ public class BaseMenu {
 				
 
 			case 2:// Login Service
-								LSI = new LoginService2Impl();
+				LSI = new LoginService2Impl();
 				LSI.InvokeLogin();
 				
 				break; // end of case 2;
