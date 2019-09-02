@@ -22,7 +22,7 @@ import pojo.EmployeeAccount;
 import pojo.GuestAccount;
 import pojo.LoginAccount;
 
-public class GuestAccountDAOImpl extends AccountDAO {
+public class GuestAccountDAOImpl implements AccountDAO {
 
 	public void register(GuestAccount GA) throws SQLException {
 		

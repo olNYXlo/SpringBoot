@@ -28,20 +28,17 @@ import pojo.LoginAccount;
 import service.EmailService;
 
 
-public class AccountDAO {
+public interface AccountDAO {
 	
-	@Autowired
-	private EmailService emailService;
+
 	
-	public boolean login(LoginAccount LA) throws SQLException {
+	
+	default public boolean login(LoginAccount LA) throws SQLException {
 		
 		String password = null;
 		boolean check = false;
 
-		// SessionFactory factory = new
-		// Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(OnlineLoginAccount.class).buildSessionFactory();
-		// Session session = factory.getCurrentSession();
-		// SessionFactory factory = meta.getSessionFactoryBuilder().build();
+
 		StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
 		Metadata meta = new MetadataSources(ssr).getMetadataBuilder().build();
 		SessionFactory factory = meta.getSessionFactoryBuilder().build();
@@ -74,15 +71,11 @@ public class AccountDAO {
 		// as if query returns null, will have some issues
 	}
 	
-	public int checkRole(LoginAccount LA) throws SQLException {
+	default public int checkRole(LoginAccount LA) throws SQLException {
 		
 		int role = 0;
 		
-		// SessionFactory factory = new
-		// Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(OnlineLoginAccount.class).buildSessionFactory();
-		// Session session = factory.getCurrentSession();
-		
-		// SessionFactory factory = meta.getSessionFactoryBuilder().build();
+
 		StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
 		Metadata meta = new MetadataSources(ssr).getMetadataBuilder().build();
 		SessionFactory factory = meta.getSessionFactoryBuilder().build();
@@ -114,15 +107,11 @@ public class AccountDAO {
 	
 	
 	
-	public EmployeeAccount getEmployeeAcc(String email) throws SQLException {
+	default public EmployeeAccount getEmployeeAcc(String email) throws SQLException {
 
 		EmployeeAccount EA = new EmployeeAccount();
 		
-		// SessionFactory factory = new
-		// Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(OnlineLoginAccount.class).buildSessionFactory();
-		// Session session = factory.getCurrentSession();
-		
-		// SessionFactory factory = meta.getSessionFactoryBuilder().build();
+
 		StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
 		Metadata meta = new MetadataSources(ssr).getMetadataBuilder().build();
 		SessionFactory factory = meta.getSessionFactoryBuilder().build();
@@ -164,9 +153,14 @@ public class AccountDAO {
 		
 	}
 	
-	public void forgotPassword(String email,HttpServletRequest request) {
+	default public void forgotPassword(String email,HttpServletRequest request) {
 		// Check return type is what
 		// as have to reset password + send link to email address
+		
+		@Autowired
+		private EmailService emailService;
+		//might have to shift email service to another class
+		// as interface cannot have attributes
 		
 
 		StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
