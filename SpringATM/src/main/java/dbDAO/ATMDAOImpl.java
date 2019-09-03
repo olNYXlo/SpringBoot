@@ -1,14 +1,9 @@
 package dbDAO;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+
 import java.sql.SQLException;
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -26,8 +21,13 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import dbPOJO.BankAccount;
 import dbPOJO.OnlineLoginAccount;
@@ -47,21 +47,8 @@ public class ATMDAOImpl implements ATMDAO {
 	// Persistence.createEntityManagerFactory("atmaccount");
 	// EntityManager em = emf.createEntityManager();
 
-	Connection con;
-	PreparedStatement ps, ps2;
 
-	void getConnection() {
-		try {
-			con = ATMDBConnection.myConnection();
-			System.out.println("Connected");
 
-			// when using db.properties file to connect
-			// do not need to have catch block as already
-			// exception already handled in the myConnection method
-		} finally {
-		}
-
-	}// end of getConnection
 
 	public static boolean checkBankAccExists(String BankAccNo) throws ClassNotFoundException, SQLException {
 		// Checks if Bank Account exists in records
@@ -444,14 +431,10 @@ public class ATMDAOImpl implements ATMDAO {
 		
 		Query query = session.createQuery(c);
 
-		try {
-			System.out.println("Verifying Login");
-			List<OnlineLoginAccount> results = query.getResultList();
-			for (OnlineLoginAccount Acc : results) {
-				password = Acc.getPassword();
-			}
-
-		} finally {
+		System.out.println("Verifying Login");
+		List<OnlineLoginAccount> results = query.getResultList();
+		for (OnlineLoginAccount Acc : results) {
+			password = Acc.getPassword();
 		}
 		session.close();
 		return (OLA.getPassword().equals(password) ? true : false);
@@ -461,6 +444,7 @@ public class ATMDAOImpl implements ATMDAO {
 
 	}
 
+	@Override
 	public BankAccount getBANo(OnlineLoginAccount OLA) throws SQLException {
 		
 		BankAccount BA = new BankAccount();

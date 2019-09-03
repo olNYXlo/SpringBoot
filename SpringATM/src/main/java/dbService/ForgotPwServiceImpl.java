@@ -4,12 +4,13 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import dbDAO.ATMDAO;
 import dbDAO.ATMDAOImpl;
 import dbPOJO.OnlineLoginAccount;
 
-
+@Service
 public class ForgotPwServiceImpl implements ForgotPwService {
 	
 	@Autowired

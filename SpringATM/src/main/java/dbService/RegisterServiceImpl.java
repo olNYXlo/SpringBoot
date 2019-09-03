@@ -4,12 +4,15 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import dbDAO.ATMDAO;
 import dbDAO.ATMDAOImpl;
 import dbPOJO.OnlineLoginAccount;
 import dbPOJO.BankAccount;
 
+
+@Service
 public class RegisterServiceImpl implements RegisterService {
 	@Autowired
 	ATMDAO refDAO; // creates ATMDAO reference
