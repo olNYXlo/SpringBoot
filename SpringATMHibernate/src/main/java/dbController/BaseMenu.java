@@ -1,14 +1,29 @@
 package dbController;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Scanner;
 
+import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.Metadata;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import dbPOJO.BankAccount;
 import dbPOJO.OnlineLoginAccount;
 import dbService.ForgotPwServiceImpl;
 import dbService.LoginService2Impl;
@@ -30,10 +45,12 @@ public class BaseMenu {
 	
 	
 	@GetMapping("/")
-	public String getAccount() {
+	public String getAccount() throws ClassNotFoundException, SQLException {
+		LSI = new LoginService2Impl();
+		LSI.InvokeLogin();
 		//ResponseBody serializes an object & returns it
 		return "home";
-	}	
+	}
 	
 
 	public void launch() throws ClassNotFoundException, SQLException {
